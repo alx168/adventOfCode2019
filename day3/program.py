@@ -39,4 +39,20 @@ def part1():
         minDist = min(minDist, manDist((0,0), point)) 
     return minDist
 
+def pathLen(coords, p1):
+    return coords.index(p1)  
+
+def part2():
+    wire1, wire2 = parseData()
+    coords1 = buildCoords(wire1)
+    coords2 = buildCoords(wire2) 
     
+    intersectPoints = set(coords1).intersection(set(coords2)).difference({(0,0)})
+    
+    minLen = float("inf")
+    for p in intersectPoints: 
+        totalLen = pathLen(coords1, p) + pathLen(coords2, p)
+        minLen = min(minLen, totalLen)
+    return minLen
+        
+print(part2())
